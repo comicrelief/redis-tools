@@ -1,0 +1,30 @@
+{
+    "name": "comicrelief/redis-tools",
+    "require": {
+        "php": "7.1.*",
+        "predis/predis": "1.1.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
+    },
+    "authors": [
+        {
+            "name": "Noel Light-Hilary",
+            "email": "n.light-hilary@comicrelief.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "RedisTools\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RedisToolsTest\\": "test/src/"
+        }
+    },
+    "scripts": {
+        "test": "phpdbg -qrr vendor/bin/phpunit"
+    }
+}

@@ -1,0 +1,13 @@
+<phpunit bootstrap="test/bootstrap.php" colors="true" verbose="false" debug="true">
+
+    <testsuite name="Redis Tools Test Suite">
+        <directory>./test</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+
+</phpunit>

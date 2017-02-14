@@ -1,0 +1,8 @@
+{
+  "PHP_VERSION": "{PHP_71_LATEST}",
+  "WEBDIR": "public",
+  "COMPOSER_INSTALL_OPTIONS": ["--no-interaction", "--no-dev", "--optimize-autoloader"],
+  "COMPOSER_VENDOR_DIR": "vendor",
+  "PHP_EXTENSIONS": [],
+  "ZEND_EXTENSIONS": ["opcache"]
+}

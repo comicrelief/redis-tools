@@ -1,0 +1,16 @@
+# No web host. This configuration applies in all FROST spaces.
+---
+buildpack: https://github.com/comicrelief/php-buildpack.git
+instances: 1
+memory: 500M
+domain: apps.comicrelief.com
+services:
+  - logging
+  - php-redis-sessions
+  - client-redis-sessions
+  - text-manager-redis
+applications:
+  - name: redis-tools
+    no-route: true
+    command: php bin/config.php
+    health-check-type: none
