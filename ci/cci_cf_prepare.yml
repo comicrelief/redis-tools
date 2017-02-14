@@ -1,0 +1,23 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: comicrelief/php7:latest, tag: "latest"}
+
+inputs:
+- name: redis-tools
+
+params:
+  CF_API: 'REPLACE_ME'
+  CF_USERNAME: 'REPLACE_ME'
+  CF_PASSWORD: 'REPLACE_ME'
+  CF_ORGANIZATION: 'REPLACE_ME'
+  CF_SPACE: 'REPLACE_ME'
+
+run:
+  path: sh
+  args:
+   - -c
+   - |
+     ./redis-tools/ci/cci_cf_prepare.sh

@@ -1,0 +1,16 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: comicrelief/php7:latest, tag: "latest"}
+
+inputs:
+- name: redis-tools
+
+run:
+  path: sh
+  args:
+   - -c
+   - |
+     ./redis-tools/ci/cci_unit.sh
