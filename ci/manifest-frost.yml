@@ -1,6 +1,6 @@
 # No web host. This configuration applies in all FROST spaces.
 ---
-buildpack: https://github.com/comicrelief/php-buildpack.git
+buildpack: https://github.com/cloudfoundry/php-buildpack.git
 instances: 1
 memory: 500M
 domain: apps.comicrelief.com
