@@ -10,5 +10,5 @@ services:
 applications:
   - name: redis-tools
     no-route: true
-    command: php bin/config.php
+    command: php bin/set-redis-config.php
     health-check-type: none
