@@ -1,6 +1,6 @@
 {
   "PHP_VERSION": "{PHP_71_LATEST}",
-  "WEBDIR": "public",
+  "WEBDIR": "bin",
   "COMPOSER_INSTALL_OPTIONS": ["--no-interaction", "--no-dev", "--optimize-autoloader"],
   "COMPOSER_VENDOR_DIR": "vendor",
   "PHP_EXTENSIONS": [],
