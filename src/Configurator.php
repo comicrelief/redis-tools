@@ -60,8 +60,15 @@ class Configurator
             throw new \RuntimeException('Redis error getting eviction policy: ' . $response);
         }
 
-        echo 'Current policy is ' . $response . '.' . PHP_EOL;
+        if (!is_array($response) || count($response) !== 2 || $response[0] !== 'maxmemory-policy') {
+            throw new \RuntimeException(
+                'Redis response in unexpected format getting eviction policy: ' .
+                print_r($response, true)
+            );
+        }
 
-        return $response;
+        echo 'Current policy is ' . $response[1] . '.' . PHP_EOL;
+
+        return $response[1];
     }
 }
