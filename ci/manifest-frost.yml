@@ -5,12 +5,11 @@ instances: 1
 memory: 500M
 domain: apps.comicrelief.com
 services:
-  - logging
   - php-redis-sessions
   - client-redis-sessions
   - text-manager-redis
 applications:
   - name: redis-tools
     no-route: true
-    command: php bin/set-redis-config.php
-    health-check-type: none
+    # We start a web server so we can have health checks and catch crashes
+    command: php bin/set-redis-config.php && /app/httpd/bin/httpd -f /home/vcap/app/httpd/conf/httpd.conf -D FOREGROUND
