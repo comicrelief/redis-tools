@@ -8,7 +8,7 @@ $instances = Hosts::parseServices(getenv('VCAP_SERVICES'));
 $configurator = new Configurator(getenv('CONFIG_ALIAS'));
 
 foreach ($instances as $instance) {
-    echo 'Setting config for ' . $instance['host'] . '...' . PHP_EOL;
+    echo 'Setting config if necessary for ' . $instance['host'] . '...' . PHP_EOL;
 
     $params = [
         'scheme' => 'tcp',

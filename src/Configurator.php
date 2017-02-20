@@ -20,6 +20,8 @@ class Configurator
     }
 
     /**
+     * Sets the Redis eviction policy, if it's not already what we want it to be.
+     *
      * @param \Predis\Client    $client
      * @param string            $policyName A valid `maxmemory-policy` value - see https://redis.io/topics/lru-cache
      * @return bool Success
@@ -27,6 +29,14 @@ class Configurator
      */
     public function setEvictionPolicy(\Predis\Client $client, string $policyName)
     {
+        $currentPolicy = $this->getEvictionPolicy($client);
+
+        if ($currentPolicy === $policyName) {
+            return true; // No need to change anything
+        }
+
+        echo 'Proceeding to set config...' . PHP_EOL;
+
         $response = $client->executeRaw([$this->configAlias, 'set', 'maxmemory-policy', $policyName], $wasError);
 
         if ($wasError) {
@@ -35,5 +45,30 @@ class Configurator
         }
 
         return true;
+    }
+
+    /**
+     * @param \Predis\Client $client
+     * @return string
+     */
+    public function getEvictionPolicy(\Predis\Client $client)
+    {
+        $response = $client->executeRaw([$this->configAlias, 'get', 'maxmemory-policy'], $wasError);
+
+        if ($wasError) {
+            $client->disconnect();
+            throw new \RuntimeException('Redis error getting eviction policy: ' . $response);
+        }
+
+        if (!is_array($response) || count($response) !== 2 || $response[0] !== 'maxmemory-policy') {
+            throw new \RuntimeException(
+                'Redis response in unexpected format getting eviction policy: ' .
+                print_r($response, true)
+            );
+        }
+
+        echo 'Current policy is ' . $response[1] . '.' . PHP_EOL;
+
+        return $response[1];
     }
 }
