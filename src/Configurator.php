@@ -36,4 +36,20 @@ class Configurator
 
         return true;
     }
+
+    /**
+     * @param \Predis\Client $client
+     * @return string
+     */
+    public function getEvictionPolicy(\Predis\Client $client)
+    {
+        $response = $client->executeRaw([$this->configAlias, 'get', 'maxmemory-policy'], $wasError);
+
+        if ($wasError) {
+            $client->disconnect();
+            throw new \RuntimeException('Redis error getting eviction policy: ' . $response);
+        }
+
+        return $response;
+    }
 }

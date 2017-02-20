@@ -19,6 +19,8 @@ foreach ($instances as $instance) {
 
     $client = new Predis\Client($params, $options);
 
+    echo 'Current policy is ' . $configurator->getEvictionPolicy($client) . '.' . PHP_EOL;
+
     // Evict least recently used keys when memory runs out, regardless of any items' expiry times
     $configurator->setEvictionPolicy($client, 'allkeys-lru');
 
